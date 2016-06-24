@@ -1,0 +1,44 @@
+{
+    "name":"cbmigrations",
+    "version":"1.0.0",
+    "author":"Eric Peterson",
+    "location":"elpete/cbmigrations#v1.0.0",
+    "homepage":"https://github.com/elpete/cbmigrations",
+    "documentation":"",
+    "repository":{
+        "type":"",
+        "URL":""
+    },
+    "bugs":"https://github.com/elpete/cbmigrations/issues",
+    "slug":"cbmigrations",
+    "shortDescription":"Keep track of database migrations using ColdBox",
+    "type":"modules",
+    "keywords":[
+        "database",
+        "migrations"
+    ],
+    "private":false,
+    "license":[
+        {
+            "type":"",
+            "URL":""
+        }
+    ],
+    "scripts":{
+        "postVersion":"package set location='elpete/cbmigrations#v`package version`'",
+        "postPublish":"!git push && !git push --tags"
+    },
+    "ignore":[
+        "**/.*",
+        "test",
+        "tests",
+        "node_modules",
+        "resources"
+    ],
+    "dependencies":{
+
+    },
+    "installPaths":{
+
+    }
+}
