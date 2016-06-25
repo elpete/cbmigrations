@@ -101,7 +101,6 @@ component {
                 "INSERT INTO cbmigrations VALUES ( :name, :time )",
                 { name = componentName, time = { value = now(), cfsqltype = "CF_SQL_TIMESTAMP" } }
             );
-            flash
         } else {
             queryExecute(
                 "DELETE FROM cbmigrations WHERE name = :name",

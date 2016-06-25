@@ -3,8 +3,6 @@ component {
     property name="migrationService" inject="MigrationService@cbmigrations";
 
     function index( event, rc, prc ) {
-        prc.errors = flash.get( "cbmigrations_errors", [] );
-        prc.messages = flash.get( "cbmigrations_messages", [] );
         prc.migrationTableInstalled = migrationService.isMigrationTableInstalled();
         prc.migrations = migrationService.findAll();
 
@@ -32,7 +30,6 @@ component {
         }
 
         if ( ! event.valueExists( "componentPath" ) ) {
-            flash.put( "cbmigrations_errors", "No componentPath specified." );
             setNextEvent( "cbmigrations" );
             return;
         }
@@ -44,7 +41,6 @@ component {
             return
         }
         catch ( any e ) {
-            flash.put( "cbmigrations_errors", serializeJSON( e ) );
             setNextEvent( "cbmigrations" );
             return;
         }
