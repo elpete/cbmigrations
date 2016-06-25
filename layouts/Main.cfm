@@ -9,6 +9,7 @@
     <!---Base URL --->
     <base href="#event.getHTMLBaseURL()#" />
     <!---css --->
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="#event.getModuleRoot()#/includes/css/cbmigrations.css" />
 </head>
 <body>

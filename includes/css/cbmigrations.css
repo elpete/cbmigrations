@@ -1,5 +1,15 @@
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom,  #fefcea 0%,#f1da36 100%);
+}
+
 #cbmigrations-app-container {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#cbmigrations-app-container h1 {
+    font-size: 48px;
+    font-family: 'Architects Daughter', cursive;
 }
 
 #cbmigrations-app-container h1, #cbmigrations-app-container h2 {
