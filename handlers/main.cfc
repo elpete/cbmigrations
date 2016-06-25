@@ -12,8 +12,13 @@ component {
     }
 
     function install( event, rc, prc ) {
-        migrationService.installMigrationTable();
-        flash.set( "cbmigrations_messages", "Migration table successfully installed." );
+        param rc.runAll = false;
+        migrationService.install( rc.runAll );
+        setNextEvent( "cbmigrations" );
+    }
+
+    function uninstall( event, rc, prc ) {
+        migrationService.uninstall();
         setNextEvent( "cbmigrations" );
     }
 

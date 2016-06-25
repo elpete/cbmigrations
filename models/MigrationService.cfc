@@ -126,7 +126,7 @@ component {
         } );
     }
 
-    function installMigrationTable() {
+    function install( runAll = false ) {
         if ( isMigrationTableInstalled() ) {
             return;
         }
@@ -138,6 +138,20 @@ component {
                 PRIMARY KEY (name)
             )
         ");
+
+        if ( runAll ) {
+            runAllMigrations( "up" );
+        }
+    }
+
+    function uninstall() {
+        if ( ! isMigrationTableInstalled() ) {
+            return;
+        }
+
+        runAllMigrations( "down" );
+        
+        queryExecute( "DROP TABLE cbmigrations" );
     }
 
     function isMigrationTableInstalled() {

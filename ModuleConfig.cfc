@@ -15,6 +15,7 @@ component {
         routes = [
             { module = "cbmigrations", pattern = "/", handler = "main", action = "index" },
             { module = "cbmigrations", pattern = "/install", handler = "main", action = { POST = "install" } },
+            { module = "cbmigrations", pattern = "/uninstall", handler = "main", action = { POST = "uninstall" } },
             { module = "cbmigrations", pattern = "/up", handler = "main", action = { POST = "migrate" }, direction = "up" },
             { module = "cbmigrations", pattern = "/down", handler = "main", action = { POST = "migrate" }, direction = "down" },
             { module = "cbmigrations", pattern = "/refresh", handler = "main", action = { POST = "refresh" } }
