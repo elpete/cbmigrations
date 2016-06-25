@@ -31,9 +31,7 @@
     "ignore":[
         "**/.*",
         "test",
-        "tests",
-        "node_modules",
-        "resources"
+        "tests"
     ],
     "dependencies":{
 
