@@ -1,0 +1,98 @@
+#cbmigrations-app-container {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+#cbmigrations-app-container h1, #cbmigrations-app-container h2 {
+    text-align: center;
+}
+
+#cbmigrations-app-container .Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cbmigrations-app-container .Table {
+    padding: 30px;
+}
+
+#cbmigrations-app-container .Table__Cell--center {
+    text-align: center;
+}
+
+#cbmigrations-app-container .Button {
+    color: #606060;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: #e3e3e3;
+    border: 1px solid darkgray;
+    margin: 0 5px;
+
+    transition: all 0.5s, color 0.2s;
+}
+
+#cbmigrations-app-container .Button:hover {
+    color: black;
+    cursor: pointer;
+    background-color: #c8c8c8;
+
+    transform: scale(1.1);
+}
+
+#cbmigrations-app-container .Button:disabled,
+#cbmigrations-app-container .Button:disabled:hover {
+    color: darkgray;
+    cursor: not-allowed;
+    border-color: #e3e3e3;
+    background-color: #f3f3f3;
+
+    transition: none;
+    transform: none;
+}
+
+#cbmigrations-app-container .Button--up {
+    color: #406f1c;
+    border-color: #406f1c;
+    background-color: #ccf592;
+}
+
+#cbmigrations-app-container .Button--up:hover {
+    color: white;
+    background-color: #72c432;
+}
+
+#cbmigrations-app-container .Button--up:disabled,
+#cbmigrations-app-container .Button--up:disabled:hover {
+    color: #72c432;
+    cursor: not-allowed;
+    border-color: #ccf592;
+    background-color: #e9ffd6;
+}
+
+#cbmigrations-app-container .Button--down {
+    color: #945752;
+    border-color: #945752;
+    background-color: #ffbbaf;
+}
+
+#cbmigrations-app-container .Button--down:hover {
+    color: white;
+    background-color: #f28e87;
+}
+
+#cbmigrations-app-container .Button--down:disabled,
+#cbmigrations-app-container .Button--down:disabled:hover {
+    color: #d67f77;
+    cursor: not-allowed;
+    border-color: #ffbbaf;
+    background-color: #ffeede;
+}
+
+#cbmigrations-app-container .Button--full-width {
+    width: 95%;
+}
+
+#cbmigrations-app-container .ButtonGroup {
+    display: flex;
+    justify-content: center;
+}

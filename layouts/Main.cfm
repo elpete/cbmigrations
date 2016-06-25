@@ -3,18 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>cbmigrations</title>
+    <title>cbmigrations — Dashboard Panel</title>
     <meta name="description" content="cbmigrations dashboard">
     <meta name="author" content="Eric Peterson">
     <!---Base URL --->
     <base href="#event.getHTMLBaseURL()#" />
     <!---css --->
+    <link rel="stylesheet" type="text/css" href="#event.getModuleRoot()#/includes/css/cbmigrations.css" />
 </head>
 <body>
-    <h1>cbmigrations</h1>
+    <div id="cbmigrations-app-container">
+        <h1>cbmigrations</h1>
+        <h2>Dashboard Panel</h2>
 
-    <!---Container And Views --->
-    <div class="container">#renderView()#</div>
+        <hr />
+
+        <div class="Container">#renderView()#</div>
+    </div>
 
 </body>
 </html>
