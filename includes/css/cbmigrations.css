@@ -1,6 +1,6 @@
 body {
     min-height: 100vh;
-    background: linear-gradient(to bottom,  #fefcea 0%,#f1da36 100%);
+    background: linear-gradient(to bottom,  #fefcea 0%, white 100%);
 }
 
 #cbmigrations-app-container {
