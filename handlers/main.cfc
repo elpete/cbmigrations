@@ -1,7 +1,7 @@
 component {
 
-    property name="migrationService" inject="MigrationService@cbmigrations";
-    property name="config" inject="coldbox:setting:cbmigrations";
+    property migrationService inject="MigrationService@cbmigrations";
+    property config inject="coldbox:setting:cbmigrations";
 
     function preHandler( event, action, eventArguments, rc, prc ) {
         var credentials = event.getHTTPBasicCredentials();

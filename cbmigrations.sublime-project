@@ -22,7 +22,7 @@
         }
     ],
     "di_property": {
-        "script_template": "property name=\"{name}\" inject=\"id\";",
+        "script_template": "property {name} inject=\"id\";",
         "tag_template": "<cfproperty name=\"{name}\" inject=\"id\">",
         "sort_properties": true
     },

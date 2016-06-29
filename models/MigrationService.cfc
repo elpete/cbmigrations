@@ -1,6 +1,6 @@
 component {
 
-    property name="config" inject="coldbox:setting:cbmigrations";
+    property config inject="coldbox:setting:cbmigrations";
 
     public array function findAll() {
 
