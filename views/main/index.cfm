@@ -22,6 +22,27 @@
     <h3>All Migrations</h3>
 
     <div class="ButtonGroup">
+        <form action="#event.buildLink( "cbmigrations.nextUp" )#" method="POST">
+            <button
+                type="submit"
+                class="Button Button--up"
+                <cfif NOT prc.migrationTableInstalled>disabled</cfif>
+            >
+                Run Next Up
+            </button>
+        </form>
+        <form action="#event.buildLink( "cbmigrations.nextDown" )#" method="POST">
+            <button
+                type="submit"
+                class="Button Button--down"
+                <cfif NOT prc.migrationTableInstalled>disabled</cfif>
+            >
+                Run Next Down
+            </button>
+        </form>
+    </div>
+
+    <div class="ButtonGroup">
         <form action="#event.buildLink( "cbmigrations.up" )#" method="POST">
             <input type="hidden" name="all" value="true" />
             <button

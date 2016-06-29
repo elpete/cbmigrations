@@ -74,6 +74,18 @@ component {
         return migrations;
     }
 
+    public void function runNextMigration( required string desiredDirection ) {
+        var migrations = findAll();
+
+        for ( var migration in migrations ) {
+            var canMigrateInDesiredDirection = migration[ "canMigrate#desiredDirection#" ];
+            if ( canMigrateInDesiredDirection ) {
+                runMigration( arguments.desiredDirection, migration.componentPath );
+                return;
+            }
+        }
+    }
+
     public void function runMigration( direction, componentPath ) {
         install();
 

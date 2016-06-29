@@ -50,9 +50,16 @@ component {
 
     function migrate( event, rc, prc ) {
         param rc.all = false;
+        param rc.next = false;
 
         if ( rc.all ) {
             migrationService.runAllMigrations( rc.direction );
+            setNextEvent( "cbmigrations" );
+            return;
+        }
+
+        if ( rc.next ) {
+            migrationService.runNextMigration( rc.direction );
             setNextEvent( "cbmigrations" );
             return;
         }

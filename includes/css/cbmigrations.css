@@ -105,4 +105,5 @@ body {
 #cbmigrations-app-container .ButtonGroup {
     display: flex;
     justify-content: center;
+    margin-bottom: 1em;
 }
