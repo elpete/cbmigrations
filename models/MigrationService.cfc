@@ -1,12 +1,12 @@
 component {
 
-    property name="migrationsDir" inject="coldbox:setting:migrationsDirectory@cbmigrations";
+    property name="config" inject="coldbox:setting:cbmigrations";
 
-    function findAll() {
+    public array function findAll() {
 
         var migrationTableInstalled = isMigrationTableInstalled();
 
-        var objectsQuery = directoryList( path = expandPath( migrationsDir ), listInfo = "query" );
+        var objectsQuery = directoryList( path = expandPath( config.migrationsDir ), listInfo = "query" );
         var objectsArray = [];
         for ( var row in objectsQuery ) {
             arrayAppend( objectsArray, row );
@@ -28,7 +28,7 @@ component {
                 fileName = file.name,
                 componentName = componentName,
                 absolutePath = file.directory & "/" & file.name,
-                componentPath = migrationsDir & "/" & componentName,
+                componentPath = config.migrationsDir & "/" & componentName,
                 timestamp = timestamp,
                 migrated = migrationRan,
                 canMigrateUp = !migrationRan && prequisitesInstalled,
@@ -74,9 +74,10 @@ component {
         return migrations;
     }
 
-    function runMigration( direction, componentPath ) {
+    public void function runMigration( direction, componentPath ) {
+        install();
 
-        var componentName = replaceNoCase( componentPath, migrationsDir & "/", "" );
+        var componentName = replaceNoCase( componentPath, config.migrationsDir & "/", "" );
         var migrationRan = isMigrationRan( componentName );
 
         if ( migrationRan && direction == "up" ) {
@@ -94,8 +95,8 @@ component {
         logMigration( direction, componentPath );
     }
 
-    function logMigration( direction, componentPath ) {
-        var componentName = replaceNoCase( componentPath, migrationsDir & "/", "" );
+    private void function logMigration( direction, componentPath ) {
+        var componentName = replaceNoCase( componentPath, config.migrationsDir & "/", "" );
         if ( direction == "up" ) {
             queryExecute(
                 "INSERT INTO cbmigrations VALUES ( :name, :time )",
@@ -108,7 +109,8 @@ component {
             );
         }
     }
-    function runAllMigrations( direction ) {
+
+    public void function runAllMigrations( direction ) {
         var migrations = arrayFilter( findAll(), function( migration ) {
             return direction == "up" ? !migration.migrated : migration.migrated;
         } );
@@ -125,7 +127,7 @@ component {
         } );
     }
 
-    function install( runAll = false ) {
+    public void function install( runAll = false ) {
         if ( isMigrationTableInstalled() ) {
             return;
         }
@@ -143,7 +145,7 @@ component {
         }
     }
 
-    function uninstall() {
+    public void function uninstall() {
         if ( ! isMigrationTableInstalled() ) {
             return;
         }
@@ -153,7 +155,7 @@ component {
         queryExecute( "DROP TABLE cbmigrations" );
     }
 
-    function isMigrationTableInstalled() {
+    public boolean function isMigrationTableInstalled() {
         cfdbinfo( name="results" type="Tables" );
         
         var tableFound = false;
@@ -167,7 +169,7 @@ component {
         return tableFound;
     }
 
-    function isMigrationRan( componentName ) {
+    private boolean function isMigrationRan( componentName ) {
         var results = queryExecute("
                 SELECT 1
                 FROM cbmigrations
@@ -179,7 +181,7 @@ component {
         return results.RecordCount > 0;
     }
 
-    private function getDateTimeColumnType() {
+    private string function getDateTimeColumnType() {
         cfdbinfo( name="results" type="Version" );
 
         switch( results.database_productName ){

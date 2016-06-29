@@ -1,12 +1,32 @@
 component {
 
     property name="migrationService" inject="MigrationService@cbmigrations";
+    property name="config" inject="coldbox:setting:cbmigrations";
+
+    function preHandler( event, action, eventArguments, rc, prc ) {
+        var credentials = event.getHTTPBasicCredentials();
+
+        if ( config.username != credentials.username ||
+             config.password != credentials.password ) {
+
+            // Not secure!
+            event.setHTTPHeader(
+                name = "WWW-Authenticate",
+                value = 'basic realm="Please enter your username and password for cbmigrations!"'
+            );
+
+            // secured content data and skip event execution
+            event.renderData(
+                data = "<h1>Unathorized Access</h1><p>Content Requires Authentication</p>",
+                statusCode = "401",
+                statusText = "Unauthorized"
+            ).noExecution();
+        }
+    }
 
     function index( event, rc, prc ) {
         prc.migrationTableInstalled = migrationService.isMigrationTableInstalled();
         prc.migrations = migrationService.findAll();
-
-        event.setLayout( name = "Main", module = "cbmigrations" );
     }
 
     function install( event, rc, prc ) {

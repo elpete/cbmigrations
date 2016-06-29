@@ -8,9 +8,7 @@ component {
     this.entryPoint = "/cbmigrations";
 
     function configure() {
-        settings = {
-            migrationsDirectory = "/resources/database/migrations"
-        };
+        parseParentSettings();
 
         routes = [
             { module = "cbmigrations", pattern = "/", handler = "main", action = "index" },
@@ -20,6 +18,22 @@ component {
             { module = "cbmigrations", pattern = "/down", handler = "main", action = { POST = "migrate" }, direction = "down" },
             { module = "cbmigrations", pattern = "/refresh", handler = "main", action = { POST = "refresh" } }
         ];
+    }
+
+    private function parseParentSettings(){
+        var oConfig = controller.getSetting( "ColdBoxConfig" );
+        var configStruct = controller.getConfigSettings();
+        var cbmigrations = oConfig.getPropertyMixin( "cbmigrations", "variables", structnew() );
+
+        //defaults
+        configStruct.cbmigrations = {
+            migrationsDir = "/resources/database/migrations",
+            username = "cbmigrations",
+            password = "cbmigrations"
+        };
+
+        // incorporate settings
+        structAppend( configStruct.cbmigrations, cbmigrations, true );
     }
 
 }
