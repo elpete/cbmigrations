@@ -1,0 +1,33 @@
+{
+    "folders":
+    [
+        {
+            "path": "."
+        }
+    ],
+    "mappings": [
+        {
+            "mapping": "/models",
+            "path": "models"
+        },
+        {
+            "mapping": "/tests",
+            "path": "tests"
+        }
+    ],
+    "cfc_folders": [
+        {
+            "path": "models",
+            "variable_names": ["{cfc}"]
+        }
+    ],
+    "di_property": {
+        "script_template": "property name=\"{name}\" inject=\"id\";",
+        "tag_template": "<cfproperty name=\"{name}\" inject=\"id\">",
+        "sort_properties": true
+    },
+    "testbox_runner_url": "http://localhost:25787/tests/runner.cfm?reporter=json&directory=",
+    "testbox_default_directory": "tests.specs",
+    "testbox_tests_root": "/Users/eric.peterson/Code/github/elpete/cbmigrations",
+    "testbox_results": {"server_root": "", "sublime_root": ""}
+}
