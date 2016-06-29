@@ -26,7 +26,7 @@
         }
     ],
     "scripts":{
-        "preVersion":"package set location='elpete/cbmigrations#v`package version`'",
+        "postVersion":"package set location='elpete/cbmigrations#v`package version`'",
         "postPublish":"!git push && !git push --tags"
     },
     "ignore":[
