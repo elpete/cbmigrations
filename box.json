@@ -1,13 +1,13 @@
 {
     "name":"cbmigrations",
-    "version":"1.1.0",
+    "version":"2.0.0",
     "author":"Eric Peterson",
     "location":"elpete/cbmigrations#v1.1.0",
     "homepage":"https://github.com/elpete/cbmigrations",
     "documentation":"",
     "repository":{
-        "type":"",
-        "URL":""
+        "type":"git",
+        "URL":"https://github.com/elpete/cbmigrations"
     },
     "bugs":"https://github.com/elpete/cbmigrations/issues",
     "slug":"cbmigrations",
@@ -15,17 +15,18 @@
     "type":"modules",
     "keywords":[
         "database",
-        "migrations"
+        "migrations",
+        "coldbox"
     ],
     "private":false,
     "license":[
         {
-            "type":"",
-            "URL":""
+            "type":"MIT",
+            "URL":"https://raw.githubusercontent.com/elpete/cbmigrations/master/LICENSE"
         }
     ],
     "scripts":{
-        "postVersion":"package set location='elpete/cbmigrations#v`package version`'",
+        "preVersion":"package set location='elpete/cbmigrations#v`package version`'",
         "postPublish":"!git push && !git push --tags"
     },
     "ignore":[
