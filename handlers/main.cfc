@@ -6,7 +6,15 @@ component {
     function preHandler( event, action, eventArguments, rc, prc ) {
         var credentials = event.getHTTPBasicCredentials();
 
-        if ( config.username != credentials.username ||
+        if ( ! structKeyExists( config, "username" ) || ! structKeyExists( config, "password" ) ) {
+            // secured content data and skip event execution
+            event.renderData(
+                data = "<h1>Forbidden Access</h1><p>Access to cbmigrations dashboard is forbidden.</p>",
+                statusCode = "403",
+                statusText = "Forbidden"
+            ).noExecution();            
+        }
+        else if ( config.username != credentials.username ||
              config.password != credentials.password ) {
 
             // Not secure!

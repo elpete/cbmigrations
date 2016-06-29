@@ -27,9 +27,7 @@ component {
 
         //defaults
         configStruct.cbmigrations = {
-            migrationsDir = "/resources/database/migrations",
-            username = "cbmigrations",
-            password = "cbmigrations"
+            migrationsDir = "/resources/database/migrations"
         };
 
         // incorporate settings
