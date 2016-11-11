@@ -2,6 +2,7 @@ component singleton {
 
     property name="config" inject="coldbox:setting:cbmigrations";
     property name="cache" inject="cachebox:default";
+    property name="flash" inject="coldbox:flash";
 
     variables.cacheKeys = {
         "migrationTableInstalled" = "cbmigrations.migrationTableInstalled",
@@ -107,8 +108,14 @@ component singleton {
         }
 
         var migration = createObject( "component", componentPath );
-        var runMigration = migration[ direction ];
-        runMigration();
+        var migrationMethod = migration[ direction ];
+        try {
+            migrationMethod();
+        }
+        catch ( any e ) {
+            flash.put( "error.migration", replaceNoCase( componentPath, config.migrationsDir & "/", "" ) );
+            rethrow;
+        }
 
         logMigration( direction, componentPath );
     }
@@ -126,6 +133,9 @@ component singleton {
                 { name = componentName }
             );
         }
+        var successfulMigrations = flash.get( "successful.migrations", [] );
+        arrayAppend( successfulMigrations, componentName );
+        flash.put( "successful.migrations", successfulMigrations );
     }
 
     public void function runAllMigrations( direction ) {

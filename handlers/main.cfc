@@ -53,70 +53,45 @@ component {
         param rc.all = false;
         param rc.next = false;
 
-        if ( rc.all ) {
-            var messages = migrationService.runAllMigrations( rc.direction );
-            param messages = [];
-            if ( event.isAjax() ) {
-                return event.renderData(
-                    type = "JSON",
-                    data = messages,
-                    statusCode = "201"
-                );
-            }
-            else {
-                for ( var message in messages ) {
-                    flashmessage.info( message );
+        var messages = [];
+        var statusCode = 201
+        transaction action="begin" {
+            try {
+                if ( rc.all ) {
+                    migrationService.runAllMigrations( rc.direction );
                 }
-                setNextEvent( "cbmigrations" );
-                return;
+                else if ( rc.next ) {
+                    migrationService.runNextMigration( rc.direction );
+                }
+                else if ( event.valueExists( "componentPath" ) ) {
+                    var migrationService.runMigration( rc.direction, rc.componentPath );
+                }
+                else {
+                    [ "No action was taken" ];
+                    statusCode = 200;
+                }
+
+                messages = flash.get( "successful.migrations", [] );
             }
-        }
-        
-        if ( rc.next ) {
-            var message = migrationService.runNextMigration( rc.direction );
-            param message = "All done";
-            if ( event.isAjax() ) {
-                return event.renderData(
-                    type = "JSON",
-                    data = message,
-                    statusCode = "201"
-                );
-            }
-            else {
-                flashmessage.info( message );
-                setNextEvent( "cbmigrations" );
-                return;
+            catch( any e ) {
+                transaction action="rollback";
+
+                messages = [ "An error occurred running the migration [#flash.get( "error.migration", "" )#].", e.detail ];
+                statusCode = 500;
             }
         }
 
-        if ( event.valueExists( "componentPath" ) ) {
-            try {
-                migrationService.runMigration( rc.direction, rc.componentPath );
-            }
-            catch ( any e ) {
-                if ( event.isAjax() ) {
-                    return event.renderData(
-                        type = "JSON",
-                        data = e.message,
-                        statusCode = "201"
-                    );
-                }
-                else {
-                    flashmessage.info( e.message );
-                    setNextEvent( "cbmigrations" );
-                    return;
-                }
-            }
-        }
-        
         if ( event.isAjax() ) {
             return event.renderData(
                 type = "JSON",
-                data = "No action was taken",
-                statusCode = "500"
+                data = messages,
+                statusCode = statusCode
             );
         }
         else {
+            for ( var message in messages ) {
+                flashmessage.info( message );
+            }
             setNextEvent( "cbmigrations" );
             return;
         }
