@@ -64,7 +64,7 @@ component {
                     migrationService.runNextMigration( rc.direction );
                 }
                 else if ( event.valueExists( "componentPath" ) ) {
-                    var migrationService.runMigration( rc.direction, rc.componentPath );
+                    migrationService.runMigration( rc.direction, rc.componentPath );
                 }
                 else {
                     [ "No action was taken" ];
