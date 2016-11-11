@@ -9,7 +9,7 @@ component {
         if ( ! structKeyExists( config, "username" ) || ! structKeyExists( config, "password" ) ) {
             // secured content data and skip event execution
             event.renderData(
-                data = "<h1>Forbidden Access</h1><p>Access to cbmigrations dashboard is forbidden.</p>",
+                data = "<h1>Forbidden Access</h1><p>Access to cbmigrations dashboard is forbidden. Make sure to set your username and password in your `config/ColdBox.cfc` under `modulesSettings.cbmigrations`.</p>",
                 statusCode = "403",
                 statusText = "Forbidden"
             ).noExecution();            
