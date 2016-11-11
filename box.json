@@ -27,6 +27,7 @@
     ],
     "scripts":{
         "postVersion":"package set location='elpete/cbmigrations#v`package version`'",
+        "onRelease": "publish",
         "postPublish":"!git push && !git push --tags"
     },
     "ignore":[
