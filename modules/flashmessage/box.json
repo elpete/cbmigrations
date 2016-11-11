@@ -1,0 +1,54 @@
+{
+    "name":"flashmessage",
+    "version":"1.2.2",
+    "author":"Eric Peterson",
+    "location":"elpete/flashmessage#v1.2.2",
+    "homepage":"https://github.com/elpete/flashmessage",
+    "documentation":"https://github.com/elpete/flashmessage/blob/master/README.md",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/elpete/flashmessage"
+    },
+    "bugs":"https://github.com/elpete/flashmessage/issues",
+    "slug":"flashmessage",
+    "shortDescription":"Easy, customizable messages across requests for ColdFusion",
+    "description":"Easy, customizable messages across requests for ColdFusion",
+    "instructions":"https://github.com/elpete/flashmessage/blob/master/README.md",
+    "changelog":"https://github.com/elpete/flashmessage/commits",
+    "type":"modules",
+    "keywords":[
+        "flash",
+        "message",
+        "notification"
+    ],
+    "private":false,
+    "engines":[
+        {
+            "type":"luce",
+            "version":">=4.5.x"
+        },
+        {
+            "type":"adobe",
+            "version":">=10.0.0"
+        }
+    ],
+    "license":[
+        {
+            "type":"MIT",
+            "url":"http://opensource.org/licenses/MIT"
+        }
+    ],
+    "ignore":[
+        "**/.*",
+        "tests"
+    ],
+    "devDependencies":{
+        "testbox":"^2.3.0+00044"
+    },
+    "installPaths":{
+        "testbox":"testbox"
+    },
+    "dependencies":{
+        
+    }
+}
