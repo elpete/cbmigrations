@@ -1,6 +1,12 @@
-component {
+component singleton {
 
-    property config inject="coldbox:setting:cbmigrations";
+    property name="config" inject="coldbox:setting:cbmigrations";
+    property name="cache" inject="cachebox:default";
+
+    variables.cacheKeys = {
+        "migrationTableInstalled" = "cbmigrations.migrationTableInstalled",
+        "dbVersion" = "cbmigrations.dbVersion"
+    };
 
     public array function findAll() {
 
@@ -152,6 +158,8 @@ component {
             )
         ");
 
+        cache.set( variables.cacheKeys.migrationTableInstalled, true );
+
         if ( runAll ) {
             runAllMigrations( "up" );
         }
@@ -165,38 +173,40 @@ component {
         runAllMigrations( "down" );
         
         queryExecute( "DROP TABLE cbmigrations" );
+
+        cache.set( variables.cacheKeys.migrationTableInstalled, false );
     }
 
     public boolean function isMigrationTableInstalled() {
-        cfdbinfo( name="results" type="Tables" );
-        
-        var tableFound = false;
-        for ( var row in results ) {
-            if ( row.table_name == "cbmigrations" ) {
-                tableFound = true;
-                break;
+        return cache.getOrSet( variables.cacheKeys.migrationTableInstalled, function() {
+            cfdbinfo( name="results" type="Tables" );
+            for ( var row in results ) {
+                if ( row.table_name == "cbmigrations" ) {
+                    return true;
+                }
             }
-        }
-
-        return tableFound;
+            return false;
+        }, 60 * 24 * 7 );
     }
 
     private boolean function isMigrationRan( componentName ) {
-        var results = queryExecute("
-                SELECT 1
-                FROM cbmigrations
-                WHERE name = :name
-            ",
-            { name = componentName }
-        );
-
-        return results.RecordCount > 0;
+        var migrations = queryExecute("
+            SELECT name
+            FROM cbmigrations
+        ");
+        
+        for ( var migration in migrations ) {
+            if ( migration.name == componentName ) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private string function getDateTimeColumnType() {
         cfdbinfo( name="results" type="Version" );
 
-        switch( results.database_productName ){
+        switch( results.database_productName ) {
             case "PostgreSQL" : {
                 return "TIMESTAMP";
             }
