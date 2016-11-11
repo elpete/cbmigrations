@@ -17,6 +17,8 @@
         <h1>cbmigrations</h1>
         <h2>Dashboard Panel</h2>
 
+        #wirebox.getInstance( "flashmessage@FlashMessage" ).render()#
+
         <hr />
 
         <div class="Container">#renderView()#</div>
