@@ -90,7 +90,12 @@ component {
         }
         else {
             for ( var message in messages ) {
-                flashmessage.info( message );
+                if ( rc.direction == "up" ) {
+                    flashmessage.info( "<strong class='text-success'>Migrated:</strong> #message#" );
+                }
+                else {
+                    flashmessage.info( "<strong class='text-danger'>Rollback:</strong> #message#" );
+                }
             }
             setNextEvent( "cbmigrations" );
             return;
